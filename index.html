@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>AI 기반 스마트 터널 관제 시스템</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Pretendard", "Noto Sans KR", Arial, sans-serif;
+      line-height: 1.6;
+      color: #1f2937;
+      background-color: #f8fafc;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-weight: 800;
+      color: #1e3a8a;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: #1e3a8a;
+    }
+
+    header {
+      background: linear-gradient(135deg, #111827, #1e3a8a);
+      color: white;
+      padding: 90px 24px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 42px;
+      margin-bottom: 18px;
+    }
+
+    header p {
+      font-size: 18px;
+      max-width: 900px;
+      margin: 0 auto 28px;
+      color: #e5e7eb;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+      background-color: white;
+      color: #1e3a8a;
+    }
+
+    .button.secondary {
+      background-color: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 70px 24px;
+      scroll-margin-top: 80px;
+    }
+
+    .section-title {
+      font-size: 30px;
+      margin-bottom: 16px;
+      color: #111827;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: #4b5563;
+      margin-bottom: 30px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
+
+    .card p {
+      color: #4b5563;
+      font-size: 15px;
+    }
+
+    .contribution-list {
+      color: #4b5563;
+      font-size: 15px;
+      padding-left: 18px;
+    }
+
+    .contribution-list li {
+      margin-bottom: 10px;
+    }
+
+    .flow {
+      background-color: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+      font-weight: 700;
+      color: #1e3a8a;
+      text-align: center;
+      line-height: 2;
+    }
+
+    .image-box {
+      background-color: #e5e7eb;
+      border: 2px dashed #9ca3af;
+      border-radius: 18px;
+      padding: 60px 24px;
+      text-align: center;
+      color: #6b7280;
+      margin-top: 20px;
+    }
+
+    .metric {
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      color: #1e3a8a;
+      margin-bottom: 8px;
+    }
+
+    .performance-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      background-color: #dbeafe;
+      color: #1e40af;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .logic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    footer {
+      background-color: #111827;
+      color: #d1d5db;
+      text-align: center;
+      padding: 36px 24px;
+      margin-top: 40px;
+    }
+
+    .image-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.82);
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .video-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.82);
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .image-modal.active {
+      display: flex;
+    }
+
+    .video-modal.active {
+      display: flex;
+    }
+
+    .image-modal img {
+      max-width: 95%;
+      max-height: 90vh;
+      border-radius: 14px;
+      background-color: white;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-modal video {
+      width: min(1000px, 95vw);
+      max-height: 90vh;
+      border-radius: 14px;
+      background-color: black;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-close {
+      position: fixed;
+      top: 24px;
+      right: 32px;
+      color: white;
+      font-size: 42px;
+      font-weight: 300;
+      cursor: pointer;
+      z-index: 10000;
+    }
+
+    .clickable-image {
+      width: 100%;
+      border-radius: 14px;
+      cursor: zoom-in;
+    }
+
+    .clickable-video {
+      width: 100%;
+      border-radius: 14px;
+      cursor: zoom-in;
+    }
+
+    .subsection-title {
+      font-size: 24px;
+      margin: 34px 0 18px;
+      color: #111827;
+    }
+
+    #demo {
+      scroll-margin-top: 90px;
+    }
+
+    .github-card {
+      margin-top: 20px;
+    }
+
+    .pipeline-image {
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-top: 20px;
+    }
+
+    .wide-image {
+      border-radius: 18px;
+    }
+
+    .performance-image {
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      margin-top: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .performance-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        align-items: flex-start;
+        gap: 10px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        gap: 10px;
+      }
+
+      header h1 {
+        font-size: 32px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+
+      .section-title {
+        font-size: 26px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .performance-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-logo">Smart Tunnel AI</div>
+    <div class="nav-links">
+      <a href="#background">프로젝트 배경</a>
+      <a href="#architecture">아키텍처</a>
+      <a href="#pipeline">파이프라인</a>
+      <a href="#core-logic">핵심 로직</a>
+      <a href="#features">주요 기능</a>
+      <a href="#performance">성능평가</a>
+      <a href="#demo">시연 영상</a>
+      <a href="#tech">기술스택</a>
+    </div>
+  </nav>
+
+  <!-- 1. 메인 소개 -->
+  <header>
+    <h1>AI 기반 스마트 터널 관제 시스템</h1>
+    <p>
+      CCTV 영상 기반 차량 객체탐지, 차량 추적, ROI 자동설정, 차선추정,
+      교통상태 분석, 사고탐지, 환기대응지원을 통합 수행하는 스마트 터널 관제 시스템입니다.
+    </p>
+
+    <div class="button-group">
+      <a href="#features" class="button">주요 기능 보기</a>
+      <a href="#performance" class="button secondary">성능 평가 보기</a>
+    </div>
+  </header>
+
+  <!-- 2. 프로젝트 핵심 요약 -->
+  <section id="overview">
+    <h2 class="section-title">프로젝트 핵심 요약</h2>
+    <p class="section-desc">
+      터널 CCTV 영상을 AI로 분석하여 교통흐름과 사고 가능성을 자동 판단하고, 웹 대시보드로 관제 정보를 제공하는 프로젝트입니다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>AI 영상 분석</h3>
+        <p>YOLO11n 기반으로 터널 CCTV 영상에서 차량 객체를 탐지하고, 실시간 분석이 가능하도록 구성했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>교통흐름 분석</h3>
+        <p>차량 추적, ROI 자동설정, 차선추정을 활용하여 정상·혼잡·정체 상태를 판단했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>사고탐지</h3>
+        <p>정지 지속, 흐름 단절, 반복 사고 후보 패턴을 기반으로 사고 가능성을 탐지하고 오탐 방어 조건을 적용했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>웹 대시보드</h3>
+        <p>Flask 백엔드와 React 프론트엔드를 연동하여 실시간 관제 화면과 사고 이벤트를 시각화했습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 프로젝트 배경 -->
+  <section id="background">
+    <h2 class="section-title">프로젝트 배경</h2>
+    <p class="section-desc">
+      터널은 폐쇄적인 도로 환경 특성상 사고 발생 시 2차 사고, 정체 확산,
+      공기질 악화 등의 위험이 빠르게 커질 수 있습니다.
+      기존 터널 관제는 CCTV 영상을 관제자가 직접 확인하는 방식에 의존하기 때문에,
+      여러 영상을 동시에 모니터링할 때 사고나 정체 상황을 즉시 발견하기 어렵다는 한계가 있습니다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>관제 부담</h3>
+        <p>다수의 CCTV를 관제자가 직접 확인해야 하므로 위험상황을 놓칠 가능성이 있습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>사고 대응 지연</h3>
+        <p>터널 사고는 빠른 초기 대응이 중요하지만, 수동 관제만으로는 즉각적인 판단이 어렵습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>AI 분석 필요성</h3>
+        <p>CCTV 영상을 AI로 분석하여 교통흐름과 사고 가능성을 자동으로 감지할 필요가 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 시스템 아키텍처 -->
+  <section id="architecture">
+    <h2 class="section-title">시스템 아키텍처</h2>
+    <p class="section-desc">
+      본 시스템은 React 기반 프론트엔드와 Flask 기반 백엔드로 구성되며,
+      백엔드는 AI 분석 파이프라인과 연결되어 CCTV 영상을 처리합니다.
+    </p>
+
+    <div class="flow">
+      CCTV 영상 입력 → Flask Backend → AI 분석 파이프라인 → React Dashboard → 관제자 모니터링
+    </div>
+
+    <img src="images/architecture.png"
+         alt="스마트 터널 시스템 아키텍처"
+         class="clickable-image wide-image" />
+  </section>
+
+  <!-- 4. AI 분석 파이프라인 -->
+  <section id="pipeline">
+    <h2 class="section-title">AI 분석 파이프라인</h2>
+    <p class="section-desc">
+      CCTV 영상 입력부터 차량 객체탐지, 추적, ROI 자동설정, 차선추정,
+      교통상태 분석, 사고탐지, 웹 대시보드 출력까지 단계적으로 구성했습니다.
+    </p>
+
+    <div class="flow">
+      CCTV 입력 → 차량 객체탐지 → 차량 추적 → ROI 자동설정 → 차선추정 → 교통상태 분석 → 사고탐지 → 웹 대시보드 출력
+    </div>
+
+    <img src="images/AI_pipeline.png"
+         alt="AI 분석 파이프라인"
+         class="clickable-image pipeline-image" />
+  </section>
+
+  <!-- 5. 핵심 분석 로직 -->
+  <section id="core-logic">
+    <h2 class="section-title">핵심 분석 로직</h2>
+    <p class="section-desc">
+      CCTV 영상마다 다른 카메라 구도와 교통 흐름을 안정적으로 분석하기 위해 ROI 자동설정, 차선추정, 교통상태 판단, 사고탐지 로직을 단계적으로 설계했습니다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>ROI 자동설정</h3>
+        <p>
+          CCTV마다 터널 위치와 카메라 각도가 다르기 때문에 고정된 분석 영역 대신 초기 프레임의 차량 검출 분포를 수집해 ROI를 자동 설정했습니다.
+          최초 약 100프레임 동안 차량 위치를 누적하고, 실제 차량 분포 기준으로 ROI를 확정한 뒤 고정해 분석 범위가 흔들리지 않도록 구성했습니다.
+        </p>
+        <div class="logic-tags">
+          <span class="tag">초기 100프레임 bootstrap</span>
+          <span class="tag">차량 분포 기반 ROI</span>
+          <span class="tag">표본 부족 시 fallback</span>
+          <span class="tag">1회 확정 후 고정</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>차선추정</h3>
+        <p>
+          차량 추적 결과로 누적된 이동 궤적을 활용하여 대표 차선을 계산했습니다.
+          안정적으로 움직이는 차량의 궤적을 선형 흐름으로 분석하고, 1차 군집화로 흐름을 분해한 뒤 2차 군집화로 유사 흐름을 병합했습니다.
+        </p>
+        <div class="logic-tags">
+          <span class="tag">차량 궤적 기반</span>
+          <span class="tag">안정 차량 필터링</span>
+          <span class="tag">1차 군집화</span>
+          <span class="tag">2차 군집화</span>
+          <span class="tag">대표 차선 확정</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>차선 재추정 / 목표 차선 수</h3>
+        <p>
+          초기 차선추정 이후에도 CCTV 환경이나 차량 흐름에 따라 차선 기준이 달라질 수 있어 관제자가 차선 재추정을 요청할 수 있는 구조로 확장했습니다.
+          목표 차선 수를 수동 지정할 수 있게 하여 자동 추정 결과를 실제 도로 구조에 맞게 보정할 수 있도록 했습니다.
+        </p>
+        <div class="logic-tags">
+          <span class="tag">차선 재추정</span>
+          <span class="tag">목표 차선 수 수동 지정</span>
+          <span class="tag">운영자 보정</span>
+          <span class="tag">차선 메모리 활용</span>
+          <span class="tag">상태/사고 로직 연계</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>상태·사고 로직 연계</h3>
+        <p>
+          확정된 ROI와 차선 정보는 교통상태 판단과 사고탐지 로직의 기반 데이터로 활용됩니다.
+          ROI는 분석 대상 차량을 제한하고, 차선 정보는 동일 차선 내 차량 흐름과 사고 후보 패턴을 판단하는 기준으로 사용했습니다.
+        </p>
+        <div class="logic-tags">
+          <span class="tag">ROI 기반 차량 필터링</span>
+          <span class="tag">동일 차선 흐름 분석</span>
+          <span class="tag">정상·혼잡·정체 판단</span>
+          <span class="tag">사고 후보 패턴 분석</span>
+          <span class="tag">오탐 방어 기반 정보</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 주요 기능 소개 -->
+  <section id="features">
+    <h2 class="section-title">주요 기능 소개</h2>
+    <p class="section-desc">
+      단순 객체탐지에서 끝나지 않고, 차량 흐름 기반의 관제 기능을 통합적으로 구현했습니다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>차량 객체탐지</h3>
+        <p>YOLO11n 모델을 활용하여 터널 CCTV 영상에서 차량을 탐지했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>차량 추적</h3>
+        <p>ByteTrack을 통해 차량 ID를 유지하고 차량별 이동 흐름을 분석했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>ROI 자동설정</h3>
+        <p>차량 검출 위치를 기반으로 터널 분석 범위를 자동 설정했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>차선추정</h3>
+        <p>차량 위치 분포와 궤적을 기반으로 대표 차선을 추정했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>교통상태 분석</h3>
+        <p>차량 이동 변화량과 평균 흐름을 기반으로 정상, 혼잡, 정체 상태를 판단했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>사고탐지</h3>
+        <p>정지 지속, 흐름 단절, 반복 사고 후보 패턴을 종합하여 사고 가능성을 탐지했습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>환기대응지원</h3>
+        <p>차량 수, 체류시간, 밀집도 기반으로 공기질 위험도를 추정하고 환기 대응을 보조했습니다.</p>
+      </div>
+    </div>
+
+    <br /><br />
+
+<h3 class="subsection-title">기능별 실행 화면</h3>
+
+<h3 class="subsection-title">객체탐지·차량추적 실행 화면</h3>
+
+<div class="card-grid">
+  <div class="card">
+    <h3>객체탐지·추적 화면 1</h3>
+    <img src="images/demo_detection_1.png"
+         alt="객체탐지 및 차량추적 실행 화면 1"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>객체탐지·추적 화면 2</h3>
+    <img src="images/demo_detection_2.png"
+         alt="객체탐지 및 차량추적 실행 화면 2"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>객체탐지·추적 화면 3</h3>
+    <img src="images/demo_detection_3.png"
+         alt="객체탐지 및 차량추적 실행 화면 3"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>객체탐지·추적 화면 4</h3>
+    <img src="images/demo_detection_4.png"
+         alt="객체탐지 및 차량추적 실행 화면 4"
+         class="clickable-image" />
+  </div>
+</div>
+
+<br /><br />
+
+<h3 class="subsection-title">ROI·차선추정 실행 화면</h3>
+
+<div class="card-grid">
+  <div class="card">
+    <h3>ROI·차선추정 화면 1</h3>
+    <img src="images/demo_lane_1.png"
+         alt="ROI 및 차선추정 실행 화면 1"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>ROI·차선추정 화면 2</h3>
+    <img src="images/demo_lane_2.png"
+         alt="ROI 및 차선추정 실행 화면 2"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>ROI·차선추정 화면 3</h3>
+    <img src="images/demo_lane_3.png"
+         alt="ROI 및 차선추정 실행 화면 3"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>ROI·차선추정 화면 4</h3>
+    <img src="images/demo_lane_4.png"
+         alt="ROI 및 차선추정 실행 화면 4"
+         class="clickable-image" />
+  </div>
+</div>
+
+<br /><br />
+
+<h3 class="subsection-title">사고탐지·환기대응 실행 화면</h3>
+
+<div class="card-grid">
+  <div class="card">
+    <h3>사고탐지·환기대응 화면 1</h3>
+    <img src="images/demo_accident_popup_1.png"
+         alt="사고탐지 및 환기대응 실행 화면 1"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>사고탐지·환기대응 화면 2</h3>
+    <img src="images/demo_accident_popup_2.png"
+         alt="사고탐지 및 환기대응 실행 화면 2"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>사고탐지·환기대응 화면 3</h3>
+    <img src="images/demo_accident_popup_3.png"
+         alt="사고탐지 및 환기대응 실행 화면 3"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>사고탐지·환기대응 화면 4</h3>
+    <img src="images/demo_accident_popup_4.png"
+         alt="사고탐지 및 환기대응 실행 화면 4"
+         class="clickable-image" />
+  </div>
+</div>
+
+  </section>
+
+  <!-- 6. 웹 대시보드 화면 -->
+  <section id="dashboard">
+    <h2 class="section-title">웹 대시보드 화면</h2>
+    <p class="section-desc">
+      실시간 CCTV 영상과 AI 분석 결과를 한 화면에서 확인할 수 있도록 웹 대시보드를 구성했습니다.
+      차량 탐지, ROI, 차선 정보, 교통상태, 사고 이벤트, 환기 위험도 등을 시각화했습니다.
+    </p>
+
+    <img src="images/dashboard.png" 
+         alt="스마트 터널 웹 대시보드 화면" 
+         class="clickable-image wide-image" />
+
+<br /><br />
+
+<h3 style="font-size:24px; margin-bottom:18px;">이벤트 로그 화면</h3>
+
+<div class="card-grid">
+  <div class="card">
+    <h3>이벤트 로그 1</h3>
+    <img src="images/demo_event_log_1.png"
+         alt="이벤트 로그 화면 1"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>이벤트 로그 2</h3>
+    <img src="images/demo_event_log_2.png"
+         alt="이벤트 로그 화면 2"
+         class="clickable-image" />
+  </div>
+
+  <div class="card">
+    <h3>이벤트 로그 3</h3>
+    <img src="images/demo_event_log_3.png"
+         alt="이벤트 로그 화면 3"
+         class="clickable-image" />
+  </div>
+</div>
+  </section>
+
+  <!-- 7. 성능 평가 결과 -->
+  <section id="performance">
+    <h2 class="section-title">성능 평가 결과</h2>
+    <p class="section-desc">
+      객체탐지, ROI·차선추정, 교통상태 판단, 사고탐지 안정성을 기능별 목표 기준과 비교하여 종합 평가했습니다.
+    </p>
+
+    <div class="performance-grid">
+      <div class="card metric">
+        <strong>0.927</strong>
+        <h3>객체탐지 Precision</h3>
+        <p>Recall 0.847 / mAP50 0.913</p>
+      </div>
+
+      <div class="card metric">
+        <strong>약 25 FPS</strong>
+        <h3>실시간 처리 성능</h3>
+        <p>목표 15 FPS 이상 달성</p>
+      </div>
+
+      <div class="card metric">
+        <strong>약 98%</strong>
+        <h3>ROI Match Rate</h3>
+        <p>ROI MAE 약 1px 내외</p>
+      </div>
+
+      <div class="card metric">
+        <strong>FP 0건</strong>
+        <h3>사고탐지 안정성</h3>
+        <p>정상·혼잡 오탐 0건</p>
+      </div>
+    </div>
+
+    <img src="images/performance.png"
+         alt="스마트 터널 성능평가 결과 요약"
+         class="clickable-image performance-image" />
+  </section>
+
+  <!-- 8. My Contribution -->
+  <section id="contribution">
+    <h2 class="section-title">My Contribution</h2>
+    <p class="section-desc">
+      본 프로젝트에서 데이터 수집부터 AI 분석 로직, 웹 연동, 성능평가까지 주요 기능 구현과 개선 과정을 직접 수행했습니다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>AI 분석 구현</h3>
+        <ul class="contribution-list">
+          <li>터널 CCTV 기반 객체탐지 데이터 수집 및 전처리</li>
+          <li>YOLO11n 모델 학습 및 객체탐지 성능 평가</li>
+          <li>ROI 자동설정 및 차선추정 로직 설계</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>관제 로직 및 웹 연동</h3>
+        <ul class="contribution-list">
+          <li>차량 이동량 기반 정상·혼잡·정체 상태 판단 로직 구현</li>
+          <li>사고탐지 후보 조건 및 오탐 방어 로직 개선</li>
+          <li>Flask 백엔드와 React 대시보드 연동</li>
+          <li>CSV 로그 기반 성능평가 및 개선 방향 도출</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Problem Solving -->
+  <section id="problem-solving">
+    <h2 class="section-title">Problem Solving</h2>
+    <p class="section-desc">
+      개발 과정에서 발생한 주요 문제를 로그와 시연 결과로 분석하고, 로직 개선을 통해 안정성을 높였습니다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>혼잡 상황에서 사고 오탐 발생</h3>
+        <p><strong>문제:</strong> 혼잡·정체 상황에서 차량이 겹쳐 보이거나 느리게 이동하면서 사고로 잘못 판단되는 문제가 발생했습니다.</p>
+        <p><strong>해결:</strong> queue-only 방어, bbox 분리 오탐 방어, 소형·원거리 객체 방어 조건을 추가하여 정상·혼잡 상황의 오탐을 줄였습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>CCTV마다 다른 차선 위치</h3>
+        <p><strong>문제:</strong> 터널 CCTV마다 카메라 각도와 도로 위치가 달라 고정된 ROI와 차선 기준을 적용하기 어려웠습니다.</p>
+        <p><strong>해결:</strong> 차량 검출 위치와 이동 궤적을 기반으로 ROI를 자동 설정하고, 대표 차선을 추정하는 방식으로 영상별 분석 안정성을 높였습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>순간 속도 변화로 인한 상태 흔들림</h3>
+        <p><strong>문제:</strong> 단일 프레임 기준 속도 변화만 사용하면 정상·혼잡·정체 판단이 흔들리는 문제가 있었습니다.</p>
+        <p><strong>해결:</strong> 차량별 이동량 EMA와 일정 프레임 버퍼 평균을 함께 활용하여 교통상태 판단의 안정성을 개선했습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. 기술적 한계 및 개선 방향 -->
+  <section id="limitations">
+    <h2 class="section-title">기술적 한계 및 개선 방향</h2>
+    <p class="section-desc">
+      실제 운영 환경에 적용하기 위해서는 다양한 터널 환경, 시간대, 날씨,
+      사고 유형에 대한 추가 검증이 필요합니다.
+    </p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>데이터 확장</h3>
+        <p>다양한 터널, 야간, 우천, 안개, 사고 유형 데이터를 추가 확보할 필요가 있습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>사고탐지 고도화</h3>
+        <p>후방추돌 외 단독 사고, 낙하물, 역주행 등 복합 위험상황 탐지로 확장할 수 있습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>운영 환경 적용</h3>
+        <p>Docker, AWS 기반 배포와 실제 관제 시스템 연동 구조를 고도화할 수 있습니다.</p>
+      </div>
+
+      <div class="card">
+        <h3>환기대응 고도화</h3>
+        <p>실제 센서 데이터와 연계하여 공기질 예측 정확도를 향상시킬 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. 사용 기술 / GitHub / 데모 영상 -->
+  <section id="tech">
+    <h2 class="section-title">사용 기술</h2>
+    <p class="section-desc">
+      AI 영상 분석, 백엔드 API, 실시간 스트리밍, 웹 대시보드 구현을 통합하여 프로젝트를 구성했습니다.
+    </p>
+
+    <div class="tech-list">
+      <span class="tag">Python</span>
+      <span class="tag">OpenCV</span>
+      <span class="tag">YOLO11n</span>
+      <span class="tag">ByteTrack</span>
+      <span class="tag">Flask</span>
+      <span class="tag">React</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Axios</span>
+      <span class="tag">CSV Log Analysis</span>
+      <span class="tag">GitHub</span>
+      <span class="tag">Docker</span>
+      <span class="tag">AWS</span>
+    </div>
+
+    <br /><br />
+
+<h2 id="demo" class="section-title">시연 영상</h2>
+
+<h3 class="subsection-title">교통상태 분석 시연</h3>
+
+<div class="card-grid">
+  <div class="card">
+    <h3>정상 주행 분석 시연 영상</h3>
+    <video controls class="clickable-video">
+      <source src="videos/demo_normal.mp4" type="video/mp4" />
+      브라우저가 비디오 태그를 지원하지 않습니다.
+    </video>
+  </div>
+
+  <div class="card">
+    <h3>혼잡 상태 분석 시연 영상</h3>
+    <video controls class="clickable-video">
+      <source src="videos/demo_congestion.mp4" type="video/mp4" />
+      브라우저가 비디오 태그를 지원하지 않습니다.
+    </video>
+  </div>
+
+  <div class="card">
+    <h3>정체 상태 분석 시연 영상</h3>
+    <video controls class="clickable-video">
+      <source src="videos/demo_jam.mp4" type="video/mp4" />
+      브라우저가 비디오 태그를 지원하지 않습니다.
+    </video>
+  </div>
+</div>
+
+<h3 class="subsection-title">사고탐지 시연</h3>
+
+<div class="card-grid">
+  <div class="card">
+    <h3>사고확정 시연 영상 1</h3>
+    <video controls class="clickable-video">
+      <source src="videos/demo_gubong_accident.mp4" type="video/mp4" />
+      브라우저가 비디오 태그를 지원하지 않습니다.
+    </video>
+  </div>
+
+  <div class="card">
+    <h3>사고확정 시연 영상 2</h3>
+    <video controls class="clickable-video">
+      <source src="videos/demo_sangju_accident.mp4" type="video/mp4" />
+      브라우저가 비디오 태그를 지원하지 않습니다.
+    </video>
+  </div>
+</div>
+
+
+    <div class="card github-card">
+      <h3>GitHub / Portfolio</h3>
+      <p>
+        GitHub Repository: 최종 코드 정리 후 공개 예정<br />
+        Web Portfolio: 배포 준비 중<br />
+        Demo Video: 본 페이지 내 시연 영상에서 확인 가능
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>AI 기반 스마트 터널 관제 시스템 Portfolio</p>
+  </footer>
+
+  <div class="image-modal" id="imageModal">
+  <span class="modal-close" id="modalClose">&times;</span>
+  <img id="modalImage" src="" alt="확대 이미지" />
+</div>
+
+<div class="video-modal" id="videoModal">
+  <span class="modal-close" id="videoModalClose">&times;</span>
+  <video id="modalVideo" controls>
+    <source id="modalVideoSource" src="" type="video/mp4" />
+    브라우저가 비디오 태그를 지원하지 않습니다.
+  </video>
+</div>
+
+<script>
+  const modal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalClose = document.getElementById("modalClose");
+  const videoModal = document.getElementById("videoModal");
+  const videoModalClose = document.getElementById("videoModalClose");
+  const modalVideo = document.getElementById("modalVideo");
+  const modalVideoSource = document.getElementById("modalVideoSource");
+
+  const clickableImages = document.querySelectorAll(".clickable-image");
+  const clickableVideos = document.querySelectorAll(".clickable-video");
+
+  const closeImageModal = () => {
+    modal.classList.remove("active");
+    modalImage.src = "";
+  };
+
+  const closeVideoModal = () => {
+    videoModal.classList.remove("active");
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+    modalVideoSource.src = "";
+    modalVideo.load();
+  };
+
+  clickableImages.forEach((image) => {
+    image.addEventListener("click", () => {
+      modalImage.src = image.src;
+      modalImage.alt = image.alt;
+      modal.classList.add("active");
+    });
+  });
+
+  clickableVideos.forEach((video) => {
+    video.addEventListener("click", () => {
+      const source = video.querySelector("source");
+
+      if (!source) {
+        return;
+      }
+
+      video.pause();
+      modalVideoSource.src = source.src;
+      modalVideo.load();
+      videoModal.classList.add("active");
+      modalVideo.play().catch(() => {});
+    });
+  });
+
+  modalClose.addEventListener("click", () => {
+    closeImageModal();
+  });
+
+  videoModalClose.addEventListener("click", () => {
+    closeVideoModal();
+  });
+
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeImageModal();
+    }
+  });
+
+  videoModal.addEventListener("click", (event) => {
+    if (event.target === videoModal) {
+      closeVideoModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeImageModal();
+      closeVideoModal();
+    }
+  });
+</script>
+
+</body>
+</html>
