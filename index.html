@@ -26,7 +26,8 @@
       --mint: #5eead4;
       --navy: #0f172a;
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
-      --container-width: 1480px;
+      --page-max-width: 1280px;
+      --page-padding: 24px;
     }
 
     html {
@@ -126,9 +127,9 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(circle at 78% 12%, rgba(34, 211, 238, 0.16), transparent 36%),
-        radial-gradient(circle at 22% 64%, rgba(94, 234, 212, 0.09), transparent 34%),
-        linear-gradient(180deg, #020617 0%, #07111f 58%, #020617 100%);
+        radial-gradient(circle at 72% 18%, rgba(34, 211, 238, 0.18), transparent 34%),
+        radial-gradient(circle at 30% 55%, rgba(20, 184, 166, 0.12), transparent 36%),
+        linear-gradient(180deg, #020617 0%, #07111f 100%);
       isolation: isolate;
     }
 
@@ -148,30 +149,24 @@
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 72px 28px 58px;
+      padding: 72px 0 58px;
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
+      box-shadow: none;
       isolation: isolate;
     }
 
     .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background: transparent;
+      content: none;
     }
 
     .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto -15% -30% -15%;
-      z-index: -1;
-      height: 46%;
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.24), transparent 65%);
-      filter: blur(34px);
+      content: none;
     }
 
     .hero-inner {
-      width: min(var(--container-width), 100%);
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
       margin: 0 auto;
       display: grid;
       grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr);
@@ -331,9 +326,9 @@
     }
 
     section {
-      width: min(var(--container-width), 100%);
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
       margin: 0 auto;
-      padding: 78px 24px;
+      padding: 78px 0;
       scroll-margin-top: 82px;
     }
 
@@ -346,9 +341,9 @@
     }
 
     .detail-kicker {
-      width: min(var(--container-width), 100%);
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0;
     }
 
     .detail-kicker span {
@@ -450,6 +445,44 @@
       color: #475569;
     }
 
+    .github-repository-card {
+      display: grid;
+      gap: 14px;
+      padding: 30px;
+    }
+
+    .github-repository-card p {
+      max-width: 760px;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: max-content;
+      min-height: 44px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 14px 28px rgba(14, 165, 233, 0.24);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .github-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(14, 165, 233, 0.32);
+    }
+
+    .github-url {
+      color: #64748b;
+      font-size: 13px;
+      word-break: break-all;
+    }
+
     .section-head {
       margin-bottom: 28px;
     }
@@ -463,18 +496,23 @@
     }
 
     .section-desc {
-      max-width: 920px;
+      width: 100%;
+      max-width: 1180px;
       color: var(--muted);
       font-size: 17px;
     }
 
     .summary-strip {
-      width: min(var(--container-width), 100%);
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
       margin: 0 auto;
-      padding: 0 24px 54px;
+      padding: 0 0 54px;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
+      box-shadow: none;
     }
 
     .landing-card,
@@ -801,6 +839,10 @@
     }
 
     @media (max-width: 760px) {
+      :root {
+        --page-padding: 18px;
+      }
+
       .navbar {
         align-items: flex-start;
         flex-direction: column;
@@ -818,7 +860,7 @@
 
       .hero {
         min-height: auto;
-        padding: 52px 18px 38px;
+        padding: 52px 0 38px;
       }
 
       .hero h1 {
@@ -839,7 +881,7 @@
       }
 
       section {
-        padding: 62px 18px;
+        padding: 62px 0;
       }
 
       .hero-preview img {
@@ -901,8 +943,7 @@
       <a href="#performance">성능 요약</a>
       <a href="#architecture">시스템 흐름</a>
       <a href="#demo">시연 영상</a>
-      <!-- TODO: 공개 GitHub Repository URL 연결 -->
-      <a href="#">GitHub</a>
+      <a href="https://github.com/juju9590/smart-tunnel-system" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </nav>
 
@@ -1302,6 +1343,25 @@
         <h3>사고확정 시연 영상 2</h3>
       </article>
     </div>
+  </section>
+
+  <section id="github">
+    <article class="card github-repository-card">
+      <span class="eyebrow">Source Code</span>
+      <h2 class="section-title">GitHub Repository</h2>
+      <p>
+        AI 분석 파이프라인, Flask 백엔드, React 대시보드 구현 코드를 GitHub에서 확인할 수 있습니다.
+      </p>
+      <a
+        href="https://github.com/juju9590/smart-tunnel-system"
+        class="github-button"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub 저장소 보기
+      </a>
+      <p class="github-url">https://github.com/juju9590/smart-tunnel-system</p>
+    </article>
   </section>
   </main>
 
