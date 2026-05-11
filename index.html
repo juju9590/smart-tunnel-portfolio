@@ -26,6 +26,7 @@
       --mint: #5eead4;
       --navy: #0f172a;
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      --container-width: 1480px;
     }
 
     html {
@@ -134,9 +135,10 @@
       inset: 0;
       z-index: -2;
       background:
-        linear-gradient(90deg, rgba(2, 6, 23, 0.96) 0%, rgba(2, 6, 23, 0.88) 42%, rgba(2, 6, 23, 0.68) 100%),
-        url("images/assets/tunnel.jpg") center / cover no-repeat;
-      opacity: 0.9;
+        radial-gradient(circle at 78% 16%, rgba(34, 211, 238, 0.16), transparent 36%),
+        radial-gradient(circle at 24% 70%, rgba(94, 234, 212, 0.09), transparent 34%),
+        linear-gradient(135deg, #020617 0%, #07111f 52%, #020617 100%);
+      opacity: 1;
     }
 
     .hero::after {
@@ -150,7 +152,7 @@
     }
 
     .hero-inner {
-      width: min(1180px, 100%);
+      width: min(var(--container-width), 100%);
       margin: 0 auto;
       display: grid;
       grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr);
@@ -310,7 +312,7 @@
     }
 
     section {
-      width: min(1120px, 100%);
+      width: min(var(--container-width), 100%);
       margin: 0 auto;
       padding: 78px 24px;
       scroll-margin-top: 82px;
@@ -335,7 +337,7 @@
     }
 
     .summary-strip {
-      width: min(1180px, 100%);
+      width: min(var(--container-width), 100%);
       margin: 0 auto;
       padding: 0 24px 54px;
       display: grid;
@@ -448,6 +450,22 @@
       padding: 24px;
     }
 
+    .image-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .image-gallery-grid .media-card {
+      padding: 14px;
+    }
+
+    .image-gallery-grid .clickable-image {
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background-color: rgba(2, 6, 23, 0.48);
+    }
+
     .card.accent {
       background:
         linear-gradient(135deg, rgba(34, 211, 238, 0.13), rgba(15, 23, 42, 0.88)),
@@ -526,9 +544,9 @@
     }
 
     .media-card h3 {
-      margin-top: 14px;
+      margin-top: 12px;
       margin-bottom: 0;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .metric-card strong {
@@ -632,6 +650,7 @@
       .summary-strip,
       .card-grid,
       .card-grid.two,
+      .image-gallery-grid,
       .stack-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -682,6 +701,7 @@
       .summary-strip,
       .card-grid,
       .card-grid.two,
+      .image-gallery-grid,
       .stack-grid {
         grid-template-columns: 1fr;
       }
@@ -942,7 +962,7 @@
     </div>
 
     <h3 class="subsection-title">객체탐지·차량추적 실행 화면</h3>
-    <div class="card-grid">
+    <div class="image-gallery-grid">
       <article class="card media-card"><img src="images/demo_detection_1.png" alt="객체탐지 및 차량추적 실행 화면 1" class="clickable-image" /><h3>객체탐지·추적 화면 1</h3></article>
       <article class="card media-card"><img src="images/demo_detection_2.png" alt="객체탐지 및 차량추적 실행 화면 2" class="clickable-image" /><h3>객체탐지·추적 화면 2</h3></article>
       <article class="card media-card"><img src="images/demo_detection_3.png" alt="객체탐지 및 차량추적 실행 화면 3" class="clickable-image" /><h3>객체탐지·추적 화면 3</h3></article>
@@ -950,7 +970,7 @@
     </div>
 
     <h3 class="subsection-title">ROI·차선추정 실행 화면</h3>
-    <div class="card-grid">
+    <div class="image-gallery-grid">
       <article class="card media-card"><img src="images/demo_lane_1.png" alt="ROI 및 차선추정 실행 화면 1" class="clickable-image" /><h3>ROI·차선추정 화면 1</h3></article>
       <article class="card media-card"><img src="images/demo_lane_2.png" alt="ROI 및 차선추정 실행 화면 2" class="clickable-image" /><h3>ROI·차선추정 화면 2</h3></article>
       <article class="card media-card"><img src="images/demo_lane_3.png" alt="ROI 및 차선추정 실행 화면 3" class="clickable-image" /><h3>ROI·차선추정 화면 3</h3></article>
@@ -958,7 +978,7 @@
     </div>
 
     <h3 class="subsection-title">사고탐지·환기대응 실행 화면</h3>
-    <div class="card-grid">
+    <div class="image-gallery-grid">
       <article class="card media-card"><img src="images/demo_accident_popup_1.png" alt="사고탐지 및 환기대응 실행 화면 1" class="clickable-image" /><h3>사고탐지·환기대응 화면 1</h3></article>
       <article class="card media-card"><img src="images/demo_accident_popup_2.png" alt="사고탐지 및 환기대응 실행 화면 2" class="clickable-image" /><h3>사고탐지·환기대응 화면 2</h3></article>
       <article class="card media-card"><img src="images/demo_accident_popup_3.png" alt="사고탐지 및 환기대응 실행 화면 3" class="clickable-image" /><h3>사고탐지·환기대응 화면 3</h3></article>
@@ -967,7 +987,7 @@
 
     <h3 class="subsection-title">웹 대시보드 및 이벤트 로그</h3>
     <img src="images/dashboard.png" alt="스마트 터널 웹 대시보드 화면" class="clickable-image wide-image" />
-    <div class="card-grid" style="margin-top: 18px;">
+    <div class="image-gallery-grid" style="margin-top: 18px;">
       <article class="card media-card"><img src="images/demo_event_log_1.png" alt="이벤트 로그 화면 1" class="clickable-image" /><h3>이벤트 로그 1</h3></article>
       <article class="card media-card"><img src="images/demo_event_log_2.png" alt="이벤트 로그 화면 2" class="clickable-image" /><h3>이벤트 로그 2</h3></article>
       <article class="card media-card"><img src="images/demo_event_log_3.png" alt="이벤트 로그 화면 3" class="clickable-image" /><h3>이벤트 로그 3</h3></article>
