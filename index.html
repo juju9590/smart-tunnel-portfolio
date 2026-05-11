@@ -26,6 +26,8 @@
       --mint: #5eead4;
       --navy: #0f172a;
       --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      --page-max-width: 1280px;
+      --page-padding: 24px;
     }
 
     html {
@@ -121,49 +123,55 @@
       background-color: rgba(94, 234, 212, 0.08);
     }
 
+    .landing-area {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 72% 18%, rgba(34, 211, 238, 0.18), transparent 34%),
+        radial-gradient(circle at 30% 55%, rgba(20, 184, 166, 0.12), transparent 36%),
+        linear-gradient(180deg, #020617 0%, #07111f 100%);
+      isolation: isolate;
+    }
+
+    .landing-area::after {
+      content: "";
+      position: absolute;
+      left: -15%;
+      right: -15%;
+      bottom: -22%;
+      z-index: -1;
+      height: 42%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent 65%);
+      filter: blur(34px);
+      pointer-events: none;
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 58px 28px 62px;
+      padding: 72px 0 58px;
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
+      box-shadow: none;
       isolation: isolate;
     }
 
     .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      background:
-        linear-gradient(90deg, rgba(2, 6, 23, 0.96) 0%, rgba(2, 6, 23, 0.88) 42%, rgba(2, 6, 23, 0.68) 100%),
-        url("images/assets/tunnel.jpg") center / cover no-repeat;
-      opacity: 0.9;
+      content: none;
     }
 
     .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto -15% -30% -15%;
-      z-index: -1;
-      height: 46%;
-      background: radial-gradient(circle, rgba(34, 211, 238, 0.24), transparent 65%);
-      filter: blur(34px);
+      content: none;
     }
 
     .hero-inner {
-      width: min(1180px, 100%);
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
       margin: 0 auto;
       display: grid;
       grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr);
       align-items: center;
-      gap: 42px;
-    }
-
-    .hero-logo {
-      width: 58px;
-      height: 58px;
-      object-fit: contain;
-      margin-bottom: 18px;
-      filter: drop-shadow(0 0 22px rgba(34, 211, 238, 0.32));
+      gap: 52px;
     }
 
     .eyebrow {
@@ -192,7 +200,7 @@
       line-height: 1.04;
       letter-spacing: 0;
       color: #ffffff;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
     }
 
     .hero-title span {
@@ -208,7 +216,7 @@
       max-width: 670px;
       color: var(--muted);
       font-size: clamp(16px, 1.5vw, 18px);
-      margin-bottom: 18px;
+      margin-bottom: 24px;
     }
 
     .hero-support {
@@ -239,47 +247,6 @@
       color: var(--mint);
       font-size: 13px;
       font-weight: 800;
-    }
-
-    .button-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 11px 17px;
-      border-radius: 999px;
-      border: 1px solid rgba(34, 211, 238, 0.56);
-      background: linear-gradient(135deg, var(--cyan), var(--mint));
-      color: #00111c;
-      font-size: 14px;
-      font-weight: 900;
-      text-decoration: none;
-      box-shadow: 0 16px 34px rgba(34, 211, 238, 0.24);
-      transition: transform 180ms ease, box-shadow 180ms ease;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 42px rgba(34, 211, 238, 0.34);
-    }
-
-    .button.secondary {
-      background: rgba(15, 23, 42, 0.58);
-      color: var(--text);
-      box-shadow: none;
-    }
-
-    .button.ghost {
-      background: transparent;
-      color: var(--mint);
-      box-shadow: none;
     }
 
     .hero-preview {
@@ -359,10 +326,161 @@
     }
 
     section {
-      width: min(1120px, 100%);
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
       margin: 0 auto;
-      padding: 78px 24px;
+      padding: 78px 0;
       scroll-margin-top: 82px;
+    }
+
+    .portfolio-detail {
+      background:
+        radial-gradient(circle at 12% 0%, rgba(14, 165, 233, 0.08), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      color: #0f172a;
+      padding-top: 34px;
+    }
+
+    .detail-kicker {
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    .detail-kicker span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 12px;
+      border: 1px solid #bae6fd;
+      border-radius: 999px;
+      background-color: #ffffff;
+      color: #0284c7;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    .portfolio-detail .eyebrow {
+      color: #0891b2;
+    }
+
+    .portfolio-detail .eyebrow::before {
+      background-color: #0891b2;
+      box-shadow: none;
+    }
+
+    .portfolio-detail .section-title,
+    .portfolio-detail .subsection-title {
+      color: #0f172a;
+    }
+
+    .portfolio-detail .section-desc,
+    .portfolio-detail .card p,
+    .portfolio-detail .card li,
+    .portfolio-detail .feature-row span {
+      color: #475569;
+    }
+
+    .portfolio-detail .card {
+      border-color: #e2e8f0;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .portfolio-detail .card:hover {
+      border-color: #7dd3fc;
+      background-color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .portfolio-detail .card.accent {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+    }
+
+    .portfolio-detail .card h3 {
+      color: #0f172a;
+    }
+
+    .portfolio-detail .feature-row {
+      border-top-color: #e2e8f0;
+    }
+
+    .portfolio-detail .feature-row strong {
+      color: #0284c7;
+    }
+
+    .portfolio-detail .tag {
+      border-color: #bae6fd;
+      background-color: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .portfolio-detail .flow {
+      border-color: #bae6fd;
+      background: linear-gradient(135deg, #ffffff, #e0f2fe);
+      color: #0369a1;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .portfolio-detail .wide-image,
+    .portfolio-detail .pipeline-image,
+    .portfolio-detail .performance-image,
+    .portfolio-detail .clickable-image,
+    .portfolio-detail .clickable-video {
+      border-color: #e2e8f0;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.1);
+    }
+
+    .portfolio-detail .image-gallery-grid .clickable-image {
+      background-color: #f8fafc;
+    }
+
+    .portfolio-detail .metric-card strong {
+      color: #0284c7;
+    }
+
+    .portfolio-detail .metric-card span {
+      color: #475569;
+    }
+
+    .github-repository-card {
+      display: grid;
+      gap: 14px;
+      padding: 30px;
+    }
+
+    .github-repository-card p {
+      max-width: 760px;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: max-content;
+      min-height: 44px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 14px 28px rgba(14, 165, 233, 0.24);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .github-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 34px rgba(14, 165, 233, 0.32);
+    }
+
+    .github-url {
+      color: #64748b;
+      font-size: 13px;
+      word-break: break-all;
     }
 
     .section-head {
@@ -378,48 +496,23 @@
     }
 
     .section-desc {
-      max-width: 920px;
+      width: 100%;
+      max-width: 1180px;
       color: var(--muted);
       font-size: 17px;
     }
 
     .summary-strip {
-      width: min(1180px, 100%);
+      width: min(calc(100% - (var(--page-padding) * 2)), var(--page-max-width));
       margin: 0 auto;
-      padding: 0 24px 54px;
+      padding: 0 0 54px;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
-    }
-
-    .hero-metrics {
-      width: min(1180px, 100%);
-      margin: 30px auto 0;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .hero-metric {
-      padding: 14px 16px;
-      border: 1px solid rgba(94, 234, 212, 0.18);
-      border-radius: 16px;
-      background-color: rgba(15, 23, 42, 0.64);
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
-    }
-
-    .hero-metric strong {
-      display: block;
-      color: var(--cyan);
-      font-size: 21px;
-      line-height: 1.1;
-      margin-bottom: 4px;
-    }
-
-    .hero-metric span {
-      color: var(--subtle);
-      font-size: 12px;
-      font-weight: 800;
+      background: transparent;
+      border-top: none;
+      border-bottom: none;
+      box-shadow: none;
     }
 
     .landing-card,
@@ -441,10 +534,8 @@
     .landing-card {
       overflow: hidden;
       display: grid;
-      grid-template-columns: minmax(180px, 0.86fr) minmax(0, 1fr);
-      align-items: center;
-      gap: 20px;
-      padding: 18px;
+      gap: 14px;
+      padding: 20px;
       background:
         linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(15, 23, 42, 0.82)),
         var(--panel);
@@ -452,23 +543,42 @@
 
     .landing-card.wide {
       grid-column: 1 / -1;
-      grid-template-columns: minmax(280px, 0.74fr) minmax(0, 1fr);
+    }
+
+    .landing-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .landing-card-frame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 190px;
+      padding: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.09), transparent 58%),
+        rgba(2, 6, 23, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 18px 40px rgba(0, 0, 0, 0.24);
     }
 
     .landing-card img {
       width: 100%;
-      max-height: 170px;
+      max-height: 210px;
       object-fit: contain;
-      border-radius: 13px;
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      border-radius: 10px;
+      border: 0;
+      box-shadow: none;
       cursor: zoom-in;
-      background-color: rgba(2, 6, 23, 0.42);
+      background-color: transparent;
     }
 
     .landing-card-label {
       display: inline-flex;
-      margin-bottom: 8px;
       color: var(--mint);
       font-size: 12px;
       font-weight: 900;
@@ -486,6 +596,7 @@
 
     .landing-card h3 {
       margin-top: 0;
+      margin-bottom: 0;
     }
 
     .landing-card p,
@@ -507,6 +618,22 @@
 
     .card {
       padding: 24px;
+    }
+
+    .image-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .image-gallery-grid .media-card {
+      padding: 14px;
+    }
+
+    .image-gallery-grid .clickable-image {
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background-color: rgba(2, 6, 23, 0.48);
     }
 
     .card.accent {
@@ -587,9 +714,9 @@
     }
 
     .media-card h3 {
-      margin-top: 14px;
+      margin-top: 12px;
       margin-bottom: 0;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .metric-card strong {
@@ -693,12 +820,9 @@
       .summary-strip,
       .card-grid,
       .card-grid.two,
+      .image-gallery-grid,
       .stack-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero-metrics {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
 
       .landing-card {
@@ -715,6 +839,10 @@
     }
 
     @media (max-width: 760px) {
+      :root {
+        --page-padding: 18px;
+      }
+
       .navbar {
         align-items: flex-start;
         flex-direction: column;
@@ -732,7 +860,7 @@
 
       .hero {
         min-height: auto;
-        padding: 46px 18px 34px;
+        padding: 52px 0 38px;
       }
 
       .hero h1 {
@@ -745,15 +873,15 @@
       }
 
       .summary-strip,
-      .hero-metrics,
       .card-grid,
       .card-grid.two,
+      .image-gallery-grid,
       .stack-grid {
         grid-template-columns: 1fr;
       }
 
       section {
-        padding: 62px 18px;
+        padding: 62px 0;
       }
 
       .hero-preview img {
@@ -769,16 +897,22 @@
         grid-template-columns: 1fr;
       }
 
+      .landing-card-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .landing-card-frame {
+        min-height: 150px;
+      }
+
       .landing-card img {
         max-height: 160px;
       }
     }
 
     @media (max-width: 420px) {
-      .button {
-        width: 100%;
-      }
-
       .hero h1 {
         font-size: 36px;
       }
@@ -809,15 +943,14 @@
       <a href="#performance">성능 요약</a>
       <a href="#architecture">시스템 흐름</a>
       <a href="#demo">시연 영상</a>
-      <!-- TODO: 공개 GitHub Repository URL 연결 -->
-      <a href="#">GitHub</a>
+      <a href="https://github.com/juju9590/smart-tunnel-system" target="_blank" rel="noopener noreferrer">GitHub</a>
     </div>
   </nav>
 
+  <div class="landing-area">
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
-        <img src="images/assets/tunnel-logo.png" alt="Smart Tunnel AI 로고" class="hero-logo" />
         <span class="eyebrow">AI TUNNEL CONTROL PLATFORM</span>
         <h1 class="hero-title">
           <span><span class="accent-text">AI</span> Smart</span>
@@ -834,10 +967,6 @@
           <span class="pill">AI Incident Detection</span>
           <span class="pill">Sensorless Ventilation</span>
         </div>
-        <div class="button-group">
-          <a href="#overview" class="button">포트폴리오 보기</a>
-          <a href="#demo" class="button secondary">시연 영상 보기</a>
-        </div>
       </div>
 
       <div class="hero-preview">
@@ -852,53 +981,46 @@
         </div>
       </div>
     </div>
-
-    <div class="hero-metrics" aria-label="프로젝트 핵심 지표">
-      <div class="hero-metric">
-        <strong>0.927</strong>
-        <span>Precision</span>
-      </div>
-      <div class="hero-metric">
-        <strong>0.913</strong>
-        <span>mAP50</span>
-      </div>
-      <div class="hero-metric">
-        <strong>약 25 FPS</strong>
-        <span>Real-time Processing</span>
-      </div>
-      <div class="hero-metric">
-        <strong>약 98%</strong>
-        <span>ROI Match Rate</span>
-      </div>
-    </div>
   </header>
 
   <div class="summary-strip" aria-label="핵심 요약">
     <article class="landing-card">
-      <img src="images/assets/landing-features.png" alt="스마트 터널 핵심 기능 요약" class="clickable-image" />
-      <div>
+      <div class="landing-card-head">
         <span class="landing-card-label">PIPELINE</span>
         <h3>핵심 기능</h3>
-        <p>객체탐지, 추적, ROI 자동설정, 차선추정, 사고탐지, 환기대응을 하나의 관제 흐름으로 통합했습니다.</p>
       </div>
+      <div class="landing-card-frame">
+        <img src="images/assets/landing-features.png" alt="스마트 터널 핵심 기능 요약" class="clickable-image" />
+      </div>
+      <p>객체탐지, 차량추적, ROI 자동설정, 차선추정, 교통상태 분석, 사고탐지, 센서리스 환기대응을 통합했습니다.</p>
     </article>
     <article class="landing-card">
-      <img src="images/assets/landing-metrics.png" alt="스마트 터널 성능 요약" class="clickable-image" />
-      <div>
+      <div class="landing-card-head">
         <span class="landing-card-label">VALIDATION</span>
         <h3>성능 요약</h3>
-        <p>Precision 0.927, mAP50 0.913, 약 25 FPS 처리 성능을 중심으로 실시간성과 안정성을 검증했습니다.</p>
       </div>
+      <div class="landing-card-frame">
+        <img src="images/assets/landing-metrics.png" alt="스마트 터널 성능 요약" class="clickable-image" />
+      </div>
+      <p>객체탐지 Precision 0.927, Recall 0.847, mAP50 0.913, 약 25 FPS의 실시간 처리 성능을 검증했습니다.</p>
     </article>
     <article class="landing-card wide">
-      <img src="images/assets/landing-workflow.png" alt="스마트 터널 시스템 흐름" class="clickable-image" />
-      <div>
+      <div class="landing-card-head">
         <span class="landing-card-label">WORKFLOW</span>
         <h3>시스템 흐름</h3>
-        <p>CCTV 입력부터 AI 분석, API 제공, React 대시보드 시각화까지 관제 워크플로우를 구성했습니다.</p>
       </div>
+      <div class="landing-card-frame">
+        <img src="images/assets/landing-workflow.png" alt="스마트 터널 시스템 흐름" class="clickable-image" />
+      </div>
+      <p>CCTV 입력부터 Detection, Tracking, ROI, Lane, State, Accident, Dashboard까지 단계적으로 구성했습니다.</p>
     </article>
   </div>
+  </div>
+
+  <main class="portfolio-detail">
+    <div class="detail-kicker">
+      <span>Portfolio Detail</span>
+    </div>
 
   <section id="overview">
     <div class="section-head">
@@ -1020,7 +1142,7 @@
     </div>
 
     <h3 class="subsection-title">객체탐지·차량추적 실행 화면</h3>
-    <div class="card-grid">
+    <div class="image-gallery-grid">
       <article class="card media-card"><img src="images/demo_detection_1.png" alt="객체탐지 및 차량추적 실행 화면 1" class="clickable-image" /><h3>객체탐지·추적 화면 1</h3></article>
       <article class="card media-card"><img src="images/demo_detection_2.png" alt="객체탐지 및 차량추적 실행 화면 2" class="clickable-image" /><h3>객체탐지·추적 화면 2</h3></article>
       <article class="card media-card"><img src="images/demo_detection_3.png" alt="객체탐지 및 차량추적 실행 화면 3" class="clickable-image" /><h3>객체탐지·추적 화면 3</h3></article>
@@ -1028,7 +1150,7 @@
     </div>
 
     <h3 class="subsection-title">ROI·차선추정 실행 화면</h3>
-    <div class="card-grid">
+    <div class="image-gallery-grid">
       <article class="card media-card"><img src="images/demo_lane_1.png" alt="ROI 및 차선추정 실행 화면 1" class="clickable-image" /><h3>ROI·차선추정 화면 1</h3></article>
       <article class="card media-card"><img src="images/demo_lane_2.png" alt="ROI 및 차선추정 실행 화면 2" class="clickable-image" /><h3>ROI·차선추정 화면 2</h3></article>
       <article class="card media-card"><img src="images/demo_lane_3.png" alt="ROI 및 차선추정 실행 화면 3" class="clickable-image" /><h3>ROI·차선추정 화면 3</h3></article>
@@ -1036,7 +1158,7 @@
     </div>
 
     <h3 class="subsection-title">사고탐지·환기대응 실행 화면</h3>
-    <div class="card-grid">
+    <div class="image-gallery-grid">
       <article class="card media-card"><img src="images/demo_accident_popup_1.png" alt="사고탐지 및 환기대응 실행 화면 1" class="clickable-image" /><h3>사고탐지·환기대응 화면 1</h3></article>
       <article class="card media-card"><img src="images/demo_accident_popup_2.png" alt="사고탐지 및 환기대응 실행 화면 2" class="clickable-image" /><h3>사고탐지·환기대응 화면 2</h3></article>
       <article class="card media-card"><img src="images/demo_accident_popup_3.png" alt="사고탐지 및 환기대응 실행 화면 3" class="clickable-image" /><h3>사고탐지·환기대응 화면 3</h3></article>
@@ -1045,7 +1167,7 @@
 
     <h3 class="subsection-title">웹 대시보드 및 이벤트 로그</h3>
     <img src="images/dashboard.png" alt="스마트 터널 웹 대시보드 화면" class="clickable-image wide-image" />
-    <div class="card-grid" style="margin-top: 18px;">
+    <div class="image-gallery-grid" style="margin-top: 18px;">
       <article class="card media-card"><img src="images/demo_event_log_1.png" alt="이벤트 로그 화면 1" class="clickable-image" /><h3>이벤트 로그 1</h3></article>
       <article class="card media-card"><img src="images/demo_event_log_2.png" alt="이벤트 로그 화면 2" class="clickable-image" /><h3>이벤트 로그 2</h3></article>
       <article class="card media-card"><img src="images/demo_event_log_3.png" alt="이벤트 로그 화면 3" class="clickable-image" /><h3>이벤트 로그 3</h3></article>
@@ -1105,7 +1227,7 @@
       <article class="card metric-card"><strong>5px 이하</strong><span>ROI MAE</span></article>
       <article class="card metric-card"><strong>100%</strong><span>차선추정 조건 충족 후 성공률</span></article>
       <article class="card metric-card"><strong>검증 완료</strong><span>정상/혼잡/정체 상태 판단</span></article>
-      <article class="card metric-card"><strong>주요 패턴</strong><span>후방추돌, 비정상 정지, 흐름 단절 대상 검증</span></article>
+      <article class="card metric-card"><strong>주요 사고 패턴</strong><span>후방추돌, 비정상 정지, 흐름 단절 대상 검증</span></article>
     </div>
     <img src="images/performance.png" alt="스마트 터널 성능평가 결과 요약" class="clickable-image performance-image" style="margin-top: 24px;" />
   </section>
@@ -1222,6 +1344,26 @@
       </article>
     </div>
   </section>
+
+  <section id="github">
+    <article class="card github-repository-card">
+      <span class="eyebrow">Source Code</span>
+      <h2 class="section-title">GitHub Repository</h2>
+      <p>
+        AI 분석 파이프라인, Flask 백엔드, React 대시보드 구현 코드를 GitHub에서 확인할 수 있습니다.
+      </p>
+      <a
+        href="https://github.com/juju9590/smart-tunnel-system"
+        class="github-button"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub 저장소 보기
+      </a>
+      <p class="github-url">https://github.com/juju9590/smart-tunnel-system</p>
+    </article>
+  </section>
+  </main>
 
   <footer>
     <p>AI Smart Tunnel Monitoring System Portfolio</p>
