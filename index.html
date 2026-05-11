@@ -122,6 +122,29 @@
       background-color: rgba(94, 234, 212, 0.08);
     }
 
+    .landing-area {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 78% 12%, rgba(34, 211, 238, 0.16), transparent 36%),
+        radial-gradient(circle at 22% 64%, rgba(94, 234, 212, 0.09), transparent 34%),
+        linear-gradient(180deg, #020617 0%, #07111f 58%, #020617 100%);
+      isolation: isolate;
+    }
+
+    .landing-area::after {
+      content: "";
+      position: absolute;
+      left: -15%;
+      right: -15%;
+      bottom: -22%;
+      z-index: -1;
+      height: 42%;
+      background: radial-gradient(circle, rgba(34, 211, 238, 0.18), transparent 65%);
+      filter: blur(34px);
+      pointer-events: none;
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
@@ -134,11 +157,7 @@
       position: absolute;
       inset: 0;
       z-index: -2;
-      background:
-        radial-gradient(circle at 78% 16%, rgba(34, 211, 238, 0.16), transparent 36%),
-        radial-gradient(circle at 24% 70%, rgba(94, 234, 212, 0.09), transparent 34%),
-        linear-gradient(135deg, #020617 0%, #07111f 52%, #020617 100%);
-      opacity: 1;
+      background: transparent;
     }
 
     .hero::after {
@@ -316,6 +335,119 @@
       margin: 0 auto;
       padding: 78px 24px;
       scroll-margin-top: 82px;
+    }
+
+    .portfolio-detail {
+      background:
+        radial-gradient(circle at 12% 0%, rgba(14, 165, 233, 0.08), transparent 32%),
+        linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+      color: #0f172a;
+      padding-top: 34px;
+    }
+
+    .detail-kicker {
+      width: min(var(--container-width), 100%);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .detail-kicker span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 12px;
+      border: 1px solid #bae6fd;
+      border-radius: 999px;
+      background-color: #ffffff;
+      color: #0284c7;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    .portfolio-detail .eyebrow {
+      color: #0891b2;
+    }
+
+    .portfolio-detail .eyebrow::before {
+      background-color: #0891b2;
+      box-shadow: none;
+    }
+
+    .portfolio-detail .section-title,
+    .portfolio-detail .subsection-title {
+      color: #0f172a;
+    }
+
+    .portfolio-detail .section-desc,
+    .portfolio-detail .card p,
+    .portfolio-detail .card li,
+    .portfolio-detail .feature-row span {
+      color: #475569;
+    }
+
+    .portfolio-detail .card {
+      border-color: #e2e8f0;
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .portfolio-detail .card:hover {
+      border-color: #7dd3fc;
+      background-color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .portfolio-detail .card.accent {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+    }
+
+    .portfolio-detail .card h3 {
+      color: #0f172a;
+    }
+
+    .portfolio-detail .feature-row {
+      border-top-color: #e2e8f0;
+    }
+
+    .portfolio-detail .feature-row strong {
+      color: #0284c7;
+    }
+
+    .portfolio-detail .tag {
+      border-color: #bae6fd;
+      background-color: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .portfolio-detail .flow {
+      border-color: #bae6fd;
+      background: linear-gradient(135deg, #ffffff, #e0f2fe);
+      color: #0369a1;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .portfolio-detail .wide-image,
+    .portfolio-detail .pipeline-image,
+    .portfolio-detail .performance-image,
+    .portfolio-detail .clickable-image,
+    .portfolio-detail .clickable-video {
+      border-color: #e2e8f0;
+      box-shadow: 0 12px 34px rgba(15, 23, 42, 0.1);
+    }
+
+    .portfolio-detail .image-gallery-grid .clickable-image {
+      background-color: #f8fafc;
+    }
+
+    .portfolio-detail .metric-card strong {
+      color: #0284c7;
+    }
+
+    .portfolio-detail .metric-card span {
+      color: #475569;
     }
 
     .section-head {
@@ -774,6 +906,7 @@
     </div>
   </nav>
 
+  <div class="landing-area">
   <header class="hero" id="top">
     <div class="hero-inner">
       <div>
@@ -841,6 +974,12 @@
       <p>CCTV 입력부터 Detection, Tracking, ROI, Lane, State, Accident, Dashboard까지 단계적으로 구성했습니다.</p>
     </article>
   </div>
+  </div>
+
+  <main class="portfolio-detail">
+    <div class="detail-kicker">
+      <span>Portfolio Detail</span>
+    </div>
 
   <section id="overview">
     <div class="section-head">
@@ -1047,7 +1186,7 @@
       <article class="card metric-card"><strong>5px 이하</strong><span>ROI MAE</span></article>
       <article class="card metric-card"><strong>100%</strong><span>차선추정 조건 충족 후 성공률</span></article>
       <article class="card metric-card"><strong>검증 완료</strong><span>정상/혼잡/정체 상태 판단</span></article>
-      <article class="card metric-card"><strong>주요 패턴</strong><span>후방추돌, 비정상 정지, 흐름 단절 대상 검증</span></article>
+      <article class="card metric-card"><strong>주요 사고 패턴</strong><span>후방추돌, 비정상 정지, 흐름 단절 대상 검증</span></article>
     </div>
     <img src="images/performance.png" alt="스마트 터널 성능평가 결과 요약" class="clickable-image performance-image" style="margin-top: 24px;" />
   </section>
@@ -1164,6 +1303,7 @@
       </article>
     </div>
   </section>
+  </main>
 
   <footer>
     <p>AI Smart Tunnel Monitoring System Portfolio</p>
