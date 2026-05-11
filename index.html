@@ -70,11 +70,26 @@
       align-items: center;
       gap: 10px;
       min-width: max-content;
-      font-size: 15px;
-      font-weight: 900;
       letter-spacing: 0;
       color: var(--text);
       text-decoration: none;
+    }
+
+    .nav-logo-text {
+      display: grid;
+      line-height: 1.1;
+    }
+
+    .nav-logo-text strong {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .nav-logo-text small {
+      color: var(--subtle);
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .nav-logo img {
@@ -92,7 +107,7 @@
     }
 
     .nav-links a {
-      padding: 8px 11px;
+      padding: 8px 12px;
       border-radius: 999px;
       color: var(--muted);
       font-size: 13px;
@@ -109,8 +124,7 @@
     .hero {
       position: relative;
       overflow: hidden;
-      min-height: calc(100vh - 64px);
-      padding: 82px 28px 64px;
+      padding: 58px 28px 62px;
       isolation: isolate;
     }
 
@@ -139,16 +153,16 @@
       width: min(1180px, 100%);
       margin: 0 auto;
       display: grid;
-      grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+      grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr);
       align-items: center;
-      gap: 48px;
+      gap: 42px;
     }
 
     .hero-logo {
-      width: 72px;
-      height: 72px;
+      width: 58px;
+      height: 58px;
       object-fit: contain;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
       filter: drop-shadow(0 0 22px rgba(34, 211, 238, 0.32));
     }
 
@@ -174,18 +188,34 @@
 
     .hero h1 {
       max-width: 720px;
-      font-size: clamp(42px, 6vw, 76px);
-      line-height: 1.02;
+      font-size: clamp(40px, 5.2vw, 66px);
+      line-height: 1.04;
       letter-spacing: 0;
       color: #ffffff;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .accent-text {
+      color: var(--cyan);
+      text-shadow: 0 0 28px rgba(34, 211, 238, 0.34);
     }
 
     .hero p {
       max-width: 670px;
       color: var(--muted);
-      font-size: clamp(16px, 1.8vw, 20px);
-      margin-bottom: 26px;
+      font-size: clamp(16px, 1.5vw, 18px);
+      margin-bottom: 18px;
+    }
+
+    .hero-support {
+      max-width: 680px;
+      color: var(--subtle);
+      font-size: 15px;
+      margin-bottom: 22px;
     }
 
     .pill-row,
@@ -215,15 +245,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 30px;
+      margin-top: 26px;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 12px 18px;
+      min-height: 44px;
+      padding: 11px 17px;
       border-radius: 999px;
       border: 1px solid rgba(34, 211, 238, 0.56);
       background: linear-gradient(135deg, var(--cyan), var(--mint));
@@ -254,42 +284,75 @@
 
     .hero-preview {
       position: relative;
-      padding: 14px;
-      border: 1px solid rgba(34, 211, 238, 0.28);
-      border-radius: 26px;
+      padding: 12px;
+      border: 1px solid rgba(34, 211, 238, 0.26);
+      border-radius: 22px;
       background:
         linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(15, 23, 42, 0.82)),
         rgba(15, 23, 42, 0.74);
       box-shadow: var(--shadow);
     }
 
+    .dashboard-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      padding: 4px 4px 0;
+    }
+
+    .dashboard-topline span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .fps-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 5px 10px;
+      border: 1px solid rgba(94, 234, 212, 0.28);
+      border-radius: 999px;
+      background-color: rgba(94, 234, 212, 0.1);
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
     .hero-preview img {
       width: 100%;
-      border-radius: 18px;
+      max-height: min(56vh, 520px);
+      object-fit: contain;
+      object-position: top center;
+      border-radius: 16px;
       border: 1px solid rgba(148, 163, 184, 0.18);
       box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
       cursor: zoom-in;
+      background-color: rgba(2, 6, 23, 0.48);
     }
 
-    .preview-badge {
-      position: absolute;
-      left: 28px;
-      bottom: 28px;
-      display: grid;
-      gap: 2px;
-      padding: 12px 14px;
+    .dashboard-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 12px;
+      padding: 13px 14px;
       border: 1px solid rgba(94, 234, 212, 0.3);
       border-radius: 16px;
       background-color: rgba(2, 6, 23, 0.78);
       backdrop-filter: blur(10px);
     }
 
-    .preview-badge strong {
+    .dashboard-caption strong {
       color: #ffffff;
-      font-size: 20px;
+      font-size: 18px;
     }
 
-    .preview-badge span {
+    .dashboard-caption span {
       color: var(--subtle);
       font-size: 12px;
       font-weight: 800;
@@ -323,10 +386,40 @@
     .summary-strip {
       width: min(1180px, 100%);
       margin: 0 auto;
-      padding: 20px 24px 40px;
+      padding: 0 24px 54px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    .hero-metrics {
+      width: min(1180px, 100%);
+      margin: 30px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-metric {
+      padding: 14px 16px;
+      border: 1px solid rgba(94, 234, 212, 0.18);
+      border-radius: 16px;
+      background-color: rgba(15, 23, 42, 0.64);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+    }
+
+    .hero-metric strong {
+      display: block;
+      color: var(--cyan);
+      font-size: 21px;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .hero-metric span {
+      color: var(--subtle);
+      font-size: 12px;
+      font-weight: 800;
     }
 
     .landing-card,
@@ -347,17 +440,40 @@
 
     .landing-card {
       overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(180px, 0.86fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 20px;
       padding: 18px;
+      background:
+        linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(15, 23, 42, 0.82)),
+        var(--panel);
+    }
+
+    .landing-card.wide {
+      grid-column: 1 / -1;
+      grid-template-columns: minmax(280px, 0.74fr) minmax(0, 1fr);
     }
 
     .landing-card img {
       width: 100%;
-      max-height: 190px;
-      object-fit: cover;
+      max-height: 170px;
+      object-fit: contain;
       border-radius: 13px;
       border: 1px solid rgba(148, 163, 184, 0.16);
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
       cursor: zoom-in;
+      background-color: rgba(2, 6, 23, 0.42);
+    }
+
+    .landing-card-label {
+      display: inline-flex;
+      margin-bottom: 8px;
+      color: var(--mint);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .landing-card h3,
@@ -369,7 +485,7 @@
     }
 
     .landing-card h3 {
-      margin-top: 18px;
+      margin-top: 0;
     }
 
     .landing-card p,
@@ -580,6 +696,22 @@
       .stack-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .hero-metrics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .landing-card {
+        grid-template-columns: 1fr;
+      }
+
+      .landing-card.wide {
+        grid-template-columns: 1fr;
+      }
+
+      .landing-card img {
+        max-height: 190px;
+      }
     }
 
     @media (max-width: 760px) {
@@ -600,7 +732,7 @@
 
       .hero {
         min-height: auto;
-        padding: 56px 18px 44px;
+        padding: 46px 18px 34px;
       }
 
       .hero h1 {
@@ -613,6 +745,7 @@
       }
 
       .summary-strip,
+      .hero-metrics,
       .card-grid,
       .card-grid.two,
       .stack-grid {
@@ -623,9 +756,21 @@
         padding: 62px 18px;
       }
 
-      .preview-badge {
-        position: static;
-        margin-top: 12px;
+      .hero-preview img {
+        max-height: none;
+      }
+
+      .dashboard-caption {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .landing-card {
+        grid-template-columns: 1fr;
+      }
+
+      .landing-card img {
+        max-height: 160px;
       }
     }
 
@@ -637,6 +782,14 @@
       .hero h1 {
         font-size: 36px;
       }
+
+      .landing-card {
+        grid-template-columns: 1fr;
+      }
+
+      .landing-card img {
+        max-height: 150px;
+      }
     }
   </style>
 </head>
@@ -645,7 +798,10 @@
   <nav class="navbar">
     <a href="#top" class="nav-logo">
       <img src="images/assets/tunnel-logo.png" alt="Smart Tunnel AI 로고" />
-      Smart Tunnel AI
+      <span class="nav-logo-text">
+        <strong>TUNNEL AI</strong>
+        <small>스마트 터널 관제 시스템</small>
+      </span>
     </a>
     <div class="nav-links">
       <a href="#overview">프로젝트 소개</a>
@@ -653,6 +809,7 @@
       <a href="#performance">성능 요약</a>
       <a href="#architecture">시스템 흐름</a>
       <a href="#demo">시연 영상</a>
+      <!-- TODO: 공개 GitHub Repository URL 연결 -->
       <a href="#">GitHub</a>
     </div>
   </nav>
@@ -661,8 +818,13 @@
     <div class="hero-inner">
       <div>
         <img src="images/assets/tunnel-logo.png" alt="Smart Tunnel AI 로고" class="hero-logo" />
-        <span class="eyebrow">AI CCTV Portfolio</span>
-        <h1>AI Smart Tunnel Monitoring System</h1>
+        <span class="eyebrow">AI TUNNEL CONTROL PLATFORM</span>
+        <h1 class="hero-title">
+          <span><span class="accent-text">AI</span> Smart</span>
+          <span>Tunnel</span>
+          <span><span class="accent-text">Monitoring</span></span>
+          <span>System</span>
+        </h1>
         <p>
           CCTV 영상만으로 차량 흐름, 사고 위험, 차선 상태, 환기 대응을 실시간 분석하는
           AI 기반 스마트 터널 관제 시스템입니다.
@@ -673,19 +835,40 @@
           <span class="pill">Sensorless Ventilation</span>
         </div>
         <div class="button-group">
-          <a href="#demo" class="button">실시간 관제 시작</a>
-          <a href="#overview" class="button secondary">포트폴리오 보기</a>
-          <!-- TODO: 공개 GitHub Repository URL 연결 -->
-          <a href="#" class="button ghost">GitHub 보기</a>
+          <a href="#overview" class="button">포트폴리오 보기</a>
+          <a href="#demo" class="button secondary">시연 영상 보기</a>
         </div>
       </div>
 
       <div class="hero-preview">
-        <img src="images/assets/landing-dashboard.png" alt="스마트 터널 대시보드 미리보기" class="clickable-image" />
-        <div class="preview-badge">
-          <strong>25 FPS</strong>
-          <span>AI Pipeline Preview</span>
+        <div class="dashboard-topline">
+          <span>Smart Tunnel Dashboard</span>
+          <strong class="fps-badge">25 FPS</strong>
         </div>
+        <img src="images/assets/landing-dashboard.png" alt="스마트 터널 대시보드 미리보기" class="clickable-image" />
+        <div class="dashboard-caption">
+          <strong>AI ANALYSIS</strong>
+          <span>CCTV 기반 실시간 관제 대시보드</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-metrics" aria-label="프로젝트 핵심 지표">
+      <div class="hero-metric">
+        <strong>0.927</strong>
+        <span>Precision</span>
+      </div>
+      <div class="hero-metric">
+        <strong>0.913</strong>
+        <span>mAP50</span>
+      </div>
+      <div class="hero-metric">
+        <strong>약 25 FPS</strong>
+        <span>Real-time Processing</span>
+      </div>
+      <div class="hero-metric">
+        <strong>약 98%</strong>
+        <span>ROI Match Rate</span>
       </div>
     </div>
   </header>
@@ -693,18 +876,27 @@
   <div class="summary-strip" aria-label="핵심 요약">
     <article class="landing-card">
       <img src="images/assets/landing-features.png" alt="스마트 터널 핵심 기능 요약" class="clickable-image" />
-      <h3>핵심 기능</h3>
-      <p>객체탐지, 추적, ROI 자동설정, 차선추정, 사고탐지, 환기대응을 하나의 관제 흐름으로 통합했습니다.</p>
+      <div>
+        <span class="landing-card-label">PIPELINE</span>
+        <h3>핵심 기능</h3>
+        <p>객체탐지, 추적, ROI 자동설정, 차선추정, 사고탐지, 환기대응을 하나의 관제 흐름으로 통합했습니다.</p>
+      </div>
     </article>
     <article class="landing-card">
       <img src="images/assets/landing-metrics.png" alt="스마트 터널 성능 요약" class="clickable-image" />
-      <h3>성능 요약</h3>
-      <p>Precision 0.927, mAP50 0.913, 약 25 FPS 처리 성능을 중심으로 실시간성과 안정성을 검증했습니다.</p>
+      <div>
+        <span class="landing-card-label">VALIDATION</span>
+        <h3>성능 요약</h3>
+        <p>Precision 0.927, mAP50 0.913, 약 25 FPS 처리 성능을 중심으로 실시간성과 안정성을 검증했습니다.</p>
+      </div>
     </article>
-    <article class="landing-card">
+    <article class="landing-card wide">
       <img src="images/assets/landing-workflow.png" alt="스마트 터널 시스템 흐름" class="clickable-image" />
-      <h3>시스템 흐름</h3>
-      <p>CCTV 입력부터 AI 분석, API 제공, React 대시보드 시각화까지 관제 워크플로우를 구성했습니다.</p>
+      <div>
+        <span class="landing-card-label">WORKFLOW</span>
+        <h3>시스템 흐름</h3>
+        <p>CCTV 입력부터 AI 분석, API 제공, React 대시보드 시각화까지 관제 워크플로우를 구성했습니다.</p>
+      </div>
     </article>
   </div>
 
@@ -759,34 +951,6 @@
       <article class="card">
         <h3>센서 의존 구조의 한계</h3>
         <p>추가 센서 설치 없이 기존 CCTV 인프라만으로 교통 분석과 환기 대응 정보를 제공하는 방향을 택했습니다.</p>
-      </article>
-    </div>
-  </section>
-
-  <section id="contribution">
-    <div class="section-head">
-      <span class="eyebrow">Contribution</span>
-      <h2 class="section-title">핵심 기여 요약</h2>
-      <p class="section-desc">데이터 준비부터 AI 분석 로직, 웹 연동, 성능평가까지 주요 기능 구현과 개선 과정을 직접 수행했습니다.</p>
-    </div>
-    <div class="card-grid two">
-      <article class="card">
-        <h3>AI 분석 및 판단 로직</h3>
-        <ul>
-          <li>YOLO 기반 차량 객체탐지 모델 학습 및 성능 평가</li>
-          <li>ByteTrack 기반 차량 추적 구조 적용</li>
-          <li>CCTV 영상 기반 ROI 자동설정 로직 구현</li>
-          <li>차량 이동량 기반 정상/혼잡/정체 상태 판단 로직 설계</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>관제 시스템 통합</h3>
-        <ul>
-          <li>사고 패턴 분석 기반 사고탐지 로직 구현</li>
-          <li>차량수, 평균속도, 체류시간, 밀집도 기반 센서리스 환기대응 로직 설계</li>
-          <li>Flask API와 React 대시보드 연동</li>
-          <li>성능평가용 로그/CSV 분석 및 지표 정리</li>
-        </ul>
       </article>
     </div>
   </section>
@@ -889,28 +1053,6 @@
     </div>
   </section>
 
-  <section id="performance">
-    <div class="section-head">
-      <span class="eyebrow">Performance</span>
-      <h2 class="section-title">성능 평가</h2>
-      <p class="section-desc">
-        객체탐지, ROI·차선추정, 교통상태 판단, 사고탐지 안정성을 기능별 목표 기준과 비교하여 종합 평가했습니다.
-      </p>
-    </div>
-    <div class="card-grid">
-      <article class="card metric-card"><strong>0.927</strong><span>Precision</span></article>
-      <article class="card metric-card"><strong>0.847</strong><span>Recall</span></article>
-      <article class="card metric-card"><strong>0.913</strong><span>mAP50</span></article>
-      <article class="card metric-card"><strong>약 25</strong><span>FPS</span></article>
-      <article class="card metric-card"><strong>약 98%</strong><span>ROI Match Rate</span></article>
-      <article class="card metric-card"><strong>5px 이하</strong><span>ROI MAE</span></article>
-      <article class="card metric-card"><strong>100%</strong><span>차선추정 조건 충족 후 성공률</span></article>
-      <article class="card metric-card"><strong>검증 완료</strong><span>정상/혼잡/정체 상태 판단</span></article>
-      <article class="card metric-card"><strong>주요 패턴</strong><span>후방추돌, 비정상 정지, 흐름 단절 대상 검증</span></article>
-    </div>
-    <img src="images/performance.png" alt="스마트 터널 성능평가 결과 요약" class="clickable-image performance-image" style="margin-top: 24px;" />
-  </section>
-
   <section id="tech">
     <div class="section-head">
       <span class="eyebrow">Tech Stack</span>
@@ -944,6 +1086,28 @@
         <p>CI/CD 기반 배포 구조 설계</p>
       </article>
     </div>
+  </section>
+
+  <section id="performance">
+    <div class="section-head">
+      <span class="eyebrow">Performance</span>
+      <h2 class="section-title">성능 평가</h2>
+      <p class="section-desc">
+        객체탐지, ROI·차선추정, 교통상태 판단, 사고탐지 안정성을 기능별 목표 기준과 비교하여 종합 평가했습니다.
+      </p>
+    </div>
+    <div class="card-grid">
+      <article class="card metric-card"><strong>0.927</strong><span>Precision</span></article>
+      <article class="card metric-card"><strong>0.847</strong><span>Recall</span></article>
+      <article class="card metric-card"><strong>0.913</strong><span>mAP50</span></article>
+      <article class="card metric-card"><strong>약 25</strong><span>FPS</span></article>
+      <article class="card metric-card"><strong>약 98%</strong><span>ROI Match Rate</span></article>
+      <article class="card metric-card"><strong>5px 이하</strong><span>ROI MAE</span></article>
+      <article class="card metric-card"><strong>100%</strong><span>차선추정 조건 충족 후 성공률</span></article>
+      <article class="card metric-card"><strong>검증 완료</strong><span>정상/혼잡/정체 상태 판단</span></article>
+      <article class="card metric-card"><strong>주요 패턴</strong><span>후방추돌, 비정상 정지, 흐름 단절 대상 검증</span></article>
+    </div>
+    <img src="images/performance.png" alt="스마트 터널 성능평가 결과 요약" class="clickable-image performance-image" style="margin-top: 24px;" />
   </section>
 
   <section id="troubleshooting">
